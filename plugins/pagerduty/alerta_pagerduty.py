@@ -20,7 +20,7 @@ class TriggerEvent(PluginBase):
 
     def post_receive(self, alert):
 
-        if alert.repeat:
+        if alert.repeat or alert.environment != "Production" or alert.severity == "info":
             return
 
         message = "%s: %s alert for %s - %s is %s" % (
