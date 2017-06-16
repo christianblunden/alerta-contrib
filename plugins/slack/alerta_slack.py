@@ -24,7 +24,7 @@ class ServiceIntegration(PluginBase):
 
     def post_receive(self, alert):
 
-        if alert.repeat:
+        if alert.repeat or alert.environment != "Production" or alert.severity == "info" or alert.status == 'closed' or alert.severity == 'normal':
             return
 
         url = SLACK_WEBHOOK_URL
